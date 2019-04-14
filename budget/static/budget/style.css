@@ -1,0 +1,40 @@
+body {
+  background-color: #443841;
+}
+.pageHeader {
+  color: #E8E2C9;
+}
+
+h2.budgetHeader {
+  color: #D69E7A;
+}
+
+table.budgetTable {
+  background-color: #8DBB8F;
+  text-align: left;
+  border-collapse: collapse;
+  min-width:50%;
+  margin: 20px;
+}
+table.budgetTable td, table.budgetTable th {
+  border: 1px solid #000000;
+  padding: 5px 4px;
+}
+table.budgetTable tbody td {
+  font-size: 13px;
+}
+table.budgetTable thead {
+  background: #699267;
+  background: -moz-linear-gradient(top, #8ead8d 0%, #789d76 66%, #699267 100%);
+  background: -webkit-linear-gradient(top, #8ead8d 0%, #789d76 66%, #699267 100%);
+  background: linear-gradient(to bottom, #8ead8d 0%, #789d76 66%, #699267 100%);
+}
+table.budgetTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+}
+table.budgetTable tfoot td {
+  font-size: 14px;
+}
