@@ -1,4 +1,6 @@
 {% extends 'budget/base.html' %}
+{% load editable_period_expense %}
+{% load computed_value %}
 
 {% block content %}
   <h2 class="budgetHeader">{{ budget_period.name }}</h2>
@@ -16,11 +18,15 @@
       {% for period_expense in budget_period_expenses %}
         {% if not period_expense.period_expense_allotment.is_long_term %}
         <tr>
-            <td>{{ period_expense.period_expense_allotment.name }}</td>
-            <td>{{ period_expense.amount }}</td>
+          {% editable_period_expense period_expense %}
         </tr>
         {% endif %}
       {% endfor %}
+        <tr class="totalRow">
+          <td>Total</td>
+          {% computed_value "monthly_total" computed_values.monthly_total %}
+        </tr>
+
     </tbody>
   </table>
 
@@ -43,6 +49,11 @@
         </tr>
         {% endif %}
       {% endfor %}
+        <tr class="totalRow">
+            <td>Total</td>
+            {% computed_value "long_term_total" computed_values.long_term_total %}
+        </tr>
+
     </tbody>
   </table>
 

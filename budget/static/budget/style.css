@@ -9,6 +9,11 @@ h2.budgetHeader {
   color: #D69E7A;
 }
 
+input[type=text] {
+  background-color: #8DBB8F;
+  border-style: none;
+}
+
 table.budgetTable {
   background-color: #8DBB8F;
   text-align: left;
@@ -37,4 +42,10 @@ table.budgetTable thead th {
 }
 table.budgetTable tfoot td {
   font-size: 14px;
+}
+
+tr.totalRow {
+  font-weight: bold;
+  background: #699267;
+  border-top: thick double;
 }

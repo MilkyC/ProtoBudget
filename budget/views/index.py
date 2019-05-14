@@ -1,9 +1,8 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
-
-from .models import Allotment, Budget, BudgetPeriod, Category, PeriodExpenseAllotment, PeriodExpense
-
+from budget.models import Allotment, Budget, BudgetPeriod, Category, PeriodExpense
+from budget.util.compute import compute_values
 
 def index(request, budget_period_id=None):
   if budget_period_id is None:
@@ -18,5 +17,6 @@ def index(request, budget_period_id=None):
       'budget_period_expenses': budget_period_expenses,
       'budget_period': budget_period,
       'categories': category_list,
+      'computed_values': compute_values(budget_period_id),
   }
   return render(request, 'budget/index.html', context)
