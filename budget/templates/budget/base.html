@@ -3,6 +3,9 @@
   <head>
     <title>Russ Family Budget</title>
     <link rel="stylesheet" href="{% static 'budget/style.css' %}?{% now "U" %}">
+    <script src="{% static 'rest_framework/js/coreapi-0.1.1.js' %}"></script>
+    <script src="{% url 'api-docs:schema-js' %}"></script>
+    <script src="{% static 'budget/js/budget.js' %}"></script>
   </head>
   <body>
     <div class="pageHeader">

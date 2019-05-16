@@ -2,5 +2,11 @@
   <input type="text" value="{{ period_expense.period_expense_allotment.name }}" readonly="true" ondblclick="this.readOnly='';">
 </td>
 <td>
-  <input type="text" value="{{ period_expense.amount }}" readonly="true" ondblclick="this.readOnly='';">
+  <input 
+    id="period_expense_{{ period_expense.id }}"
+    type="text"
+    value="{{ period_expense.amount }}"
+    readonly="true"
+    ondblclick="editCell('period_expense_{{ period_expense.id }}');"
+    onblur="finishEditingCell('periodexpense', 'amount', 'period_expense_{{ period_expense.id }}', {{ period_expense.id }});">
 </td>
