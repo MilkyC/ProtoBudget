@@ -9,6 +9,18 @@ h2.budgetHeader {
   color: #D69E7A;
 }
 
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 input[type=text] {
   background-color: #8DBB8F;
   border-style: none;

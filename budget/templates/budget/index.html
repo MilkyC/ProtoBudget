@@ -3,78 +3,110 @@
 {% load computed_value %}
 
 {% block content %}
-  <h2 class="budgetHeader">{{ budget_period.name }}</h2>
- <table class="budgetTable">
-    <thead>
-      <tr>
-        <th colspan="2">Monthly</th>
-      </tr>
-      <tr>
-        <th>Category</th>
-        <th>Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for period_expense in budget_period_expenses %}
-        {% if not period_expense.period_expense_allotment.is_long_term %}
-        <tr>
-          {% editable_period_expense period_expense %}
-        </tr>
-        {% endif %}
-      {% endfor %}
-        <tr class="totalRow">
-          <td>Total</td>
-          {% computed_value "monthly_total" computed_values.monthly_total %}
-        </tr>
-
-    </tbody>
-  </table>
-
-  <table class="budgetTable">
-    <thead>
-      <tr>
-        <th colspan="2">Long Term</th>
-      </tr>
-      <tr>
-        <th>Category</th>
-        <th>Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for period_expense in budget_period_expenses %}
-        {% if period_expense.period_expense_allotment.is_long_term %}
-        <tr>
-            <td>{{ period_expense.period_expense_allotment.name }}</td>
-            <td>{{ period_expense.amount }}</td>
-        </tr>
-        {% endif %}
-      {% endfor %}
-        <tr class="totalRow">
-            <td>Total</td>
-            {% computed_value "long_term_total" computed_values.long_term_total %}
-        </tr>
-
-    </tbody>
-  </table>
-
-  {% if categories %}
-    <table class="budgetTable">
+ <h2 class="budgetHeader">{{ budget_period.name }}</h2>
+ <div class="row">
+  <div class="column">
+   <h3>Monthly/Long Term Expenses</h3>
+   <table class="budgetTable">
       <thead>
         <tr>
-          {% for category in categories %}
-          <th>{{ category.name }}</th>
-          {% endfor %}
+          <th colspan="2">Monthly</th>
+        </tr>
+        <tr>
+          <th>Category</th>
+          <th>Amount</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          {% for category in categories %}
-            <td>poop</td>
-          {% endfor %}
-        </tr>
+        {% for period_expense in budget_period_expenses %}
+          {% if not period_expense.period_expense_allotment.is_long_term %}
+          <tr>
+            {% editable_period_expense period_expense %}
+          </tr>
+          {% endif %}
+        {% endfor %}
+          <tr class="totalRow">
+            <td>Total</td>
+            {% computed_value "monthly_total" computed_values.monthly_total %}
+          </tr>
+
       </tbody>
     </table>
-  {% else %}
-    <p>No categories are available.</p>
-  {% endif %}
+
+    <table class="budgetTable">
+      <thead>
+        <tr>
+          <th colspan="2">Long Term</th>
+        </tr>
+        <tr>
+          <th>Category</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for period_expense in budget_period_expenses %}
+          {% if period_expense.period_expense_allotment.is_long_term %}
+          <tr>
+              <td>{{ period_expense.period_expense_allotment.name }}</td>
+              <td>{{ period_expense.amount }}</td>
+          </tr>
+          {% endif %}
+        {% endfor %}
+          <tr class="totalRow">
+              <td>Total</td>
+              {% computed_value "long_term_total" computed_values.long_term_total %}
+          </tr>
+
+      </tbody>
+    </table>
+
+    {% if categories %}
+      <table class="budgetTable">
+        <thead>
+          <tr>
+            {% for category in categories %}
+            <th>{{ category.name }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% for category in categories %}
+              <td>poop</td>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+    {% else %}
+      <p>No categories are available.</p>
+    {% endif %}
+    </div>
+    <div class="column">
+      <h3>Monthly Allotments</h3>
+      <table class="budgetTable">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Carryover</th>
+            <th>Alloted</th>
+            <th>Total</th>
+            <th>Remaining</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for allotment in allotments %}
+            <tr>
+              <td>{{ allotment.category.name }}</td>
+              <td>0</td>
+              <td>{{ allotment.amount }}</td>
+              {% with "allotment_total_"|addstr:allotment.id as curr_id %}
+              {% computed_value curr_id computed_values|lookup:curr_id  %}
+              {% endwith %}
+              <td>3</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 {% endblock %}

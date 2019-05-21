@@ -11,9 +11,11 @@ def index(request, budget_period_id=None):
     budget_period = BudgetPeriod.objects.get(pk=budget_period_id)
 
   budget_period_expenses = PeriodExpense.objects.filter(budget_period=budget_period)
-
+  allotments = Allotment.objects.filter(budget_period=budget_period)
   category_list = Category.objects.all()
+  
   context = {
+      'allotments': allotments,
       'budget_period_expenses': budget_period_expenses,
       'budget_period': budget_period,
       'categories': category_list,

@@ -8,6 +8,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register('budgetperiod', api.BudgetPeriodViewSet)
 router.register('categories', api.CategoryViewSet)
+router.register('computedvalue', api.ComputedValueViewSet)
 router.register('allotments', api.AllotmentViewSet)
 router.register('periodexpense', api.PeriodExpenseViewSet)
 router.register('periodexpenseallotment', api.PeriodExpenseAllotmentViewSet)

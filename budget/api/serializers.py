@@ -1,4 +1,4 @@
-from budget.models import Allotment, Budget, BudgetPeriod, Category, Expense, ExpenseSpent, Income, PeriodExpenseAllotment, PeriodExpense
+from budget.models import Allotment, Budget, BudgetPeriod, Category, ComputedValue, Expense, ExpenseSpent, Income, PeriodExpenseAllotment, PeriodExpense
 from rest_framework import serializers
 
 
@@ -54,4 +54,10 @@ class IncomeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Income 
         fields = ('id', 'budget_period', 'name', 'date', 'amount')
+
+
+class ComputedValueSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ComputedValue 
+        fields = ('id', 'budget_period', 'name', 'amount')
 

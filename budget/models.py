@@ -77,3 +77,12 @@ class Income(models.Model):
 
   def __str__(self):
     return '{} {}'.format(self.name, self.amount)
+
+
+class ComputedValue(models.Model):
+  budget_period = models.ForeignKey(BudgetPeriod, on_delete=models.CASCADE)
+  name = models.CharField(max_length=100)
+  amount = models.DecimalField(max_digits=6, decimal_places=2)
+
+  def __str__(self):
+    return '{} {}'.format(self.name, self.amount)

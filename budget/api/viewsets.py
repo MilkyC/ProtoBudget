@@ -1,5 +1,7 @@
-from budget.models import Category
+import coreapi
+from budget.models import * 
 from rest_framework import viewsets
+from rest_framework.schemas import AutoSchema
 from .serializers import * 
 
 
@@ -82,3 +84,30 @@ class IncomeViewSet(viewsets.ModelViewSet):
 
     serializer_class = IncomeSerializer
     queryset = Income.objects.all()
+
+class ComputedValueViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows ComputedValue to be viewed or edited.
+    """
+
+    serializer_class = ComputedValueSerializer
+    queryset = ComputedValue.objects.all()
+
+    schema = AutoSchema(
+        manual_fields=[
+            coreapi.Field(
+              "budget_period_id",
+              location="query",
+            ),
+        ]
+    )
+
+    def get_queryset(self):
+      """
+      Filter ComputedValues by BudgetPeriodId
+      """
+      queryset = ComputedValue.objects.all()
+      budget_period_id = self.request.query_params.get('budget_period_id', None)
+      if budget_period_id is not None:
+          queryset = queryset.filter(budget_period_id__id=budget_period_id)
+      return queryset
